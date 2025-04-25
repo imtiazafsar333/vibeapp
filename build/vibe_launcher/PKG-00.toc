@@ -1,0 +1,95 @@
+('C:\\Users\\eGeeks '
+ 'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\vibe_launcher.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\venv\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('vibe_launcher',
+   'C:\\Users\\eGeeks Global\\Downloads\\vibeeeeeee\\vibe_launcher.py',
+   'PYSOURCE'),
+  ('python39.dll',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\python39.dll',
+   'BINARY'),
+  ('unicodedata.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('libcrypto-1_1.dll',
+   'C:\\Users\\eGeeks '
+   'Global\\AppData\\Local\\Programs\\Python\\Python39\\DLLs\\libcrypto-1_1.dll',
+   'BINARY'),
+  ('base_library.zip',
+   'C:\\Users\\eGeeks '
+   'Global\\Downloads\\vibeeeeeee\\build\\vibe_launcher\\base_library.zip',
+   'DATA')],
+ 'python39.dll',
+ False,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)
