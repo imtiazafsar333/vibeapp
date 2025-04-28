@@ -3,14 +3,6 @@ import pandas as pd
 from io import BytesIO
 import altair as alt
 from datetime import datetime
-import openai
-
-# ✅ Load OpenAI API Key safely
-try:
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
-except Exception as e:
-    st.error("❌ Failed to load OpenAI API key. Check your .streamlit/secrets.toml file.")
-    st.stop()
 
 st.set_page_config(page_title="Vibe-Based Master Tracker", layout="wide")
 st.sidebar.title("📂 Navigation")
@@ -40,7 +32,6 @@ def extract_section(df, start_keyword):
         return pd.DataFrame()
     start = start_idx[0] + 1
 
-    # Find end row: next heading OR completely empty row block
     headings = ["Pending Tasks", "Planned Tasks for Tomorrow", "Challenges and Recommendations"]
     end = len(df)
     for i in range(start, len(df)):
@@ -174,29 +165,6 @@ elif page == "Dashboard":
         excel_data = to_excel_bytes(filtered_summary, master_df)
         st.download_button("📥 Download Combined Report", data=excel_data, file_name="Compiled_Master_Tracker.xlsx")
 
-        if st.button("🧠 Generate AI Summary"):
-            st.markdown("### 🤖 GPT Summary")
-            try:
-                gpt_prompt = f"""
-                You are a productivity analyst. Given this table of employee time tracking, write a concise summary:
-
-                {filtered_summary.to_markdown(index=False)}
-
-                Focus on who achieved or missed productivity, trends, and suggestions.
-                """
-                response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
-                    messages=[
-                        {"role": "system", "content": "You are an assistant that explains productivity insights clearly."},
-                        {"role": "user", "content": gpt_prompt}
-                    ]
-                )
-                summary_text = response.choices[0].message.content
-                st.success("✅ AI Summary Generated")
-                st.markdown(summary_text)
-            except Exception as e:
-                st.error(f"❌ GPT request failed: {e}")
-
 # -------------------- Additional Information Page -------------------- #
 elif page == "Additional Information":
     st.title("🗂️ Additional Task Sections")
@@ -222,3 +190,8 @@ elif page == "Additional Information":
             if not df.empty:
                 st.markdown(f"**Report #{i+1}**")
                 st.dataframe(df)
+
+# -------------------- Admin Panel -------------------- #
+elif page == "Admin Panel":
+    st.title("🔐 Admin Panel")
+    st.markdown("Version 1.0.0 | Last updated: " + datetime.now().strftime("%Y-%m-%d"))
