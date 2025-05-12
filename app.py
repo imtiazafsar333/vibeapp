@@ -1,14 +1,96 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+from xhtml2pdf import pisa
 import altair as alt
 from datetime import datetime
+import tempfile
 
 st.set_page_config(page_title="Vibe-Based Master Tracker", layout="wide")
 st.sidebar.title("📂 Navigation")
 page = st.sidebar.radio("Go to", ["Dashboard", "Upload & Process", "Additional Information", "Admin Panel"])
 
 # -------------------- Helper Functions -------------------- #
+
+# --- Page Config ---
+st.set_page_config(page_title="Vibe-Based Master Tracker", layout="wide")
+
+
+# --- Helper Functions ---
+
+def to_excel_bytes(daily, weekly, monthly, summary, full):
+    buffer = BytesIO()
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+        daily.to_excel(writer, sheet_name="Daily Productivity", index=False)
+        weekly.to_excel(writer, sheet_name="Weekly Productivity", index=False)
+        monthly.to_excel(writer, sheet_name="Monthly Productivity", index=False)
+        summary.to_excel(writer, sheet_name="Summary by Employee", index=False)
+        full.to_excel(writer, sheet_name="Master Tracker", index=False)
+    return buffer.getvalue()
+
+
+def create_pdf_from_html(html_content):
+    temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    with open(temp_pdf.name, "w+b") as result_file:
+        pisa.CreatePDF(src=html_content, dest=result_file)
+    return temp_pdf.name
+
+
+def generate_pdf_content(daily, weekly, monthly, total_team_hours, total_employees, average_hours_per_employee):
+    today_date = datetime.now().strftime("%d %B %Y")
+    company_logo_url = "https://yourcompany.com/logo.png"  # Replace with your company logo link if you want
+    html_content = f"""
+    <html>
+    <head>
+    <style>
+    body {{ font-family: Arial, sans-serif; margin: 30px; }}
+    h1 {{ color: #333; text-align: center; }}
+    h2 {{ color: #555; margin-top: 40px; }}
+    p {{ font-size: 14px; }}
+    .logo {{ text-align: center; margin-bottom: 10px; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
+    th, td {{ border: 1px solid #dddddd; text-align: center; padding: 8px; }}
+    th {{ background-color: #f2f2f2; }}
+    tr:nth-child(even) {{ background-color: #f9f9f9; }}
+    </style>
+    </head>
+    <body>
+
+    <div class="logo">
+        <img src="{company_logo_url}" width="120">
+    </div>
+
+    <h1>Vibe Tracker - Team Productivity Report</h1>
+    <p style="text-align:center;">Generated on: {today_date}</p>
+
+    <h2>📋 Overall Team Summary</h2>
+    <p><strong>Total Team Hours:</strong> {total_team_hours:,.2f} hrs</p>
+    <p><strong>Employees:</strong> {total_employees}</p>
+    <p><strong>Average Hours per Employee:</strong> {average_hours_per_employee:,.2f} hrs</p>
+
+    <h2>🕒 Daily Productivity</h2>
+    {daily.to_html(index=False)}
+
+    <h2>📆 Weekly Productivity</h2>
+    {weekly.to_html(index=False)}
+
+    <h2>📅 Monthly Productivity</h2>
+    {monthly.to_html(index=False)}
+
+    </body>
+    </html>
+    """
+    return html_content
+
+
+# --- Session State Init ---
+if "master_df" not in st.session_state:
+    st.session_state.master_df = pd.DataFrame()
+    st.session_state.df_summary = pd.DataFrame()
+
+# --- Sidebar Navigation ---
+st.sidebar.title("📂 Navigation")
+page = st.sidebar.radio("Go to", ["Upload & Process", "Dashboard"])
 
 def detect_productivity_by_hours(hours):
     return "✅ Productivity Achieved" if hours >= 8 else "❌ Productivity Not Achieved"
